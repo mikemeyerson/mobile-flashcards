@@ -1,11 +1,16 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import AddDeck from './components/AddDeck';
 import DeckList from './components/DeckList';
-import DeckView from './components/DeckView';
+import DeckDetails from './components/DeckDetails';
+import Quiz from './components/Quiz';
+import AddCard from './components/AddCard';
 import PhoneStatusBar from './components/PhoneStatusBar';
+import reducer from './reducers';
 
 
 const Tabs = TabNavigator({
@@ -13,42 +18,56 @@ const Tabs = TabNavigator({
     screen: DeckList,
     navigationOptions: {
       tabBarLabel: 'My Decks',
-      tabBarIcon: ({ tintColor }) => <MaterialCommunityIcons name='cards' size={30} color={tintColor} />
-    }
+      tabBarIcon: ({ tintColor }) =>
+        <MaterialCommunityIcons name="cards" size={30} color={tintColor} />,
+    },
   },
   Create: {
     screen: AddDeck,
     navigationOptions: {
       tabBarLabel: 'New Deck',
-      tabBarIcon: ({ tintColor }) => <MaterialIcons name='add-box' size={30} color={tintColor} />
-    }
-  }
+      tabBarIcon: ({ tintColor }) =>
+        <MaterialIcons name="add-box" size={30} color={tintColor} />,
+    },
+  },
 }, {
   navigationOptions: {
-    header: null
+    header: null,
   },
-  animationEnabled: true
+  animationEnabled: true,
 });
 
 const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
   },
-  DeckView: {
-    screen: DeckView,
-    navigationOptions: ({navigation}) => ({
+  DeckDetails: {
+    screen: DeckDetails,
+    navigationOptions: ({ navigation }) => ({
       title: navigation.state.params.deck.title,
     }),
-	}
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: () => ({
+      title: '[deck.title here] Quiz',
+    }),
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: () => ({
+      title: 'New Card',
+    }),
+  },
 });
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={{flex: 1}}>
-        <PhoneStatusBar />
-        <MainNavigator />
-      </View>
-    );
-  }
-}
+const store = createStore(reducer);
+
+export default () => (
+  <Provider store={store}>
+    <View style={{ flex: 1 }}>
+      <PhoneStatusBar />
+      <MainNavigator />
+    </View>
+  </Provider>
+);
