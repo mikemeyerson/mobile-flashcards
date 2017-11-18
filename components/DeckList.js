@@ -1,48 +1,58 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, StyleSheet } from 'react-native';
-import DeckCard from './DeckCard';
+import DeckPreview from './DeckPreview';
+import { getDecks } from '../reducers';
 
 // TODO: Make list of decks scrollable
 class DeckList extends Component {
+  onPress = (id) => this.props.navigation.navigate('DeckView', { deck: this.state.decks[id] });
 
-	state = {
-			decks :[{
-			id: 0,
-			title: "deck 1",
-			numCards: 3
-		}, {
-			id: 1,
-			title: "deck 2",
-			numCards: 7
-		}]
-	};
+  render() {
+    const { decks } = this.props;
 
-	onPress = (id) => this.props.navigation.navigate('DeckView', { deck: this.state.decks[id] });
+    if (decks.length === 0) {
+      return (
+        <View style={[styles.container, styles.center]}>
+          <Text style={styles.header}>
+            Create a deck to get started!
+          </Text>
+        </View>
+      );
+    }
 
-	render() {
-		const { decks } = this.state;
-
-		return (
-			<View style={styles.container}>
-				<Text>Deck List</Text>
-				<DeckCard onPress={this.onPress} deck={decks[0]} />
-				<DeckCard onPress={this.onPress} deck={decks[1]} />
-			</View>
-		);
-	}
+    return (
+      <View style={styles.container}>
+        <Text>Deck List</Text>
+        {decks.map((deck) => (
+          <DeckPreview key={deck.id} onPress={this.onPress} deck={deck} />
+        ))}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-		padding: 20,
-    backgroundColor: 'gray',
+    padding: 20,
     alignItems: 'stretch',
   },
-	row: {
-		flex: 1,
-		flexDirection: 'row',
-	}
+  header: {
+    fontSize: 30,
+    textAlign: 'center',
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
-export default DeckList;
+const mapStateToProps = (state) => ({
+  decks: getDecks(state),
+});
+
+export default connect(
+  mapStateToProps,
+  null,
+)(DeckList);
