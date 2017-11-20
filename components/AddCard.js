@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { addCardToDeck } from '../actions';
+import { View, TextInput, Text, StyleSheet } from 'react-native';
+import { v4 } from 'uuid';
+import Button from './shared/Button';
+import { addCardToDeck } from '../ducks/cards';
+
+// TODO: Feature: add multiple cards at once
 
 class AddCard extends Component {
   state = {
@@ -11,19 +15,24 @@ class AddCard extends Component {
 
   handleChangeText = (fieldName, value) =>
     this.setState(() => ({
-      fieldName: value,
+      [fieldName]: value,
     }));
 
-  handleQuestionChange = this.handleChangeText.bind('question');
-  handleAnswerChange = this.handleChangeText.bind('answer');
+  handleQuestionChange = this.handleChangeText.bind(this, 'question');
+  handleAnswerChange = this.handleChangeText.bind(this, 'answer');
 
   handleSubmit = () => {
     const { createNewCard, navigation } = this.props;
     const { deck } = navigation.state.params;
+    const card = {
+      ...this.state,
+      id: v4(),
+      parentId: deck.id,
+    };
 
-    createNewCard(deck.id, this.state);
+    createNewCard(card);
 
-    navigation.back();
+    navigation.goBack();
 
     this.setState(() => ({
       question: '',
@@ -32,12 +41,10 @@ class AddCard extends Component {
   };
 
   render() {
-    const { title } = this.props.navigation.state.params.deck;
     const { question, answer } = this.state;
 
     return (
-      <View>
-        <Text style={styles.header}>Add a card to {title}</Text>
+      <View style={styles.container}>
         <TextInput
           autoFocus
           maxLength={50}
@@ -55,15 +62,19 @@ class AddCard extends Component {
           style={styles.input}
           value={answer}
         />
-        <TouchableOpacity onPress={this.handleSubmit}>
+        <Button onPress={this.handleSubmit}>
           <Text>Submit</Text>
-        </TouchableOpacity>
+        </Button>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 20,
+    alignItems: 'center',
+  },
   header: {
     fontSize: 30,
   },

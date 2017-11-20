@@ -1,10 +1,10 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const DeckPreview = ({ deck, onPress }) => (
+const DeckPreview = ({ deck, cards, onPress }) => (
   <TouchableOpacity style={styles.container} onPress={() => onPress(deck)}>
     <Text style={styles.header}>{deck.title}</Text>
-    <Text>{deck.questions.length} cards</Text>
+    <Text>{`${cards.length} card${cards.length !== 1 ? 's' : ''}`}</Text>
   </TouchableOpacity>
 );
 

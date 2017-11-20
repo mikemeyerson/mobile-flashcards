@@ -8,7 +8,7 @@ import DeckList from './components/DeckList';
 import DeckDetails from './components/DeckDetails';
 import Quiz from './components/Quiz';
 import AddCard from './components/AddCard';
-import reducer from './reducers';
+import reducer from './ducks';
 
 const MainNavigator = StackNavigator({
   Home: {
@@ -46,49 +46,51 @@ const MainNavigator = StackNavigator({
 });
 
 const initialState = {
-  byId: {
-    1: {
-      title: 'Art',
-      id: 1,
-      questions: [],
+  decks: {
+    byId: {
+      1: {
+        title: 'Art',
+        id: 1,
+        questions: [],
+      },
+      2: {
+        title: 'Science',
+        id: 2,
+        questions: [],
+      },
+      3: {
+        title: 'Math',
+        id: 3,
+        questions: [],
+      },
+      4: {
+        title: 'History',
+        id: 4,
+        questions: [],
+      },
+      5: {
+        title: 'Writing',
+        id: 5,
+        questions: [],
+      },
+      6: {
+        title: 'Music',
+        id: 6,
+        questions: [],
+      },
+      7: {
+        title: 'Sports',
+        id: 7,
+        questions: [],
+      },
+      8: {
+        title: 'Coding',
+        id: 8,
+        questions: [],
+      },
     },
-    2: {
-      title: 'Science',
-      id: 2,
-      questions: [],
-    },
-    3: {
-      title: 'Math',
-      id: 3,
-      questions: [],
-    },
-    4: {
-      title: 'History',
-      id: 4,
-      questions: [],
-    },
-    5: {
-      title: 'Writing',
-      id: 5,
-      questions: [],
-    },
-    6: {
-      title: 'Music',
-      id: 6,
-      questions: [],
-    },
-    7: {
-      title: 'Sports',
-      id: 7,
-      questions: [],
-    },
-    8: {
-      title: 'Coding',
-      id: 8,
-      questions: [],
-    },
+    allIds: [1, 2, 3, 4, 5, 6, 7, 8],
   },
-  allIds: [1, 2, 3, 4, 5, 6, 7, 8],
 };
 
 const store = createStore(reducer, initialState);
