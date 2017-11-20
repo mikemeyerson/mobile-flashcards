@@ -2,26 +2,28 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const DeckDetails = ({ navigation }) => {
-  const deck = navigation.state.params;
+  const { deck } = navigation.state.params;
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{deck.title}</Text>
-      <Text style={styles.subheader}>{deck.numCards} cards</Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>
-          Add Card
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Quiz')}>
-        <Text style={styles.buttonText}>
-          Start Quiz
-        </Text>
-      </TouchableOpacity>
+      <Text style={styles.subheader}>{deck.questions.length} cards</Text>
+      <View style={styles.buttonGroup}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('AddCard', { deck })}
+        >
+          <Text style={styles.buttonText}>Add Card</Text>
+        </TouchableOpacity>
+        {deck.questions.length > 0 && (
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Quiz')}>
+            <Text style={styles.buttonText}>Start Quiz</Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -36,6 +38,9 @@ const styles = StyleSheet.create({
   subheader: {
     fontSize: 30,
     color: 'gray',
+  },
+  buttonGroup: {
+    marginTop: 20,
   },
   button: {
     backgroundColor: 'white',

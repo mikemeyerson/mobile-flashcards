@@ -1,45 +1,29 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { View } from 'react-native';
-import { TabNavigator, StackNavigator } from 'react-navigation';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { View, Button } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 import AddDeck from './components/AddDeck';
 import DeckList from './components/DeckList';
 import DeckDetails from './components/DeckDetails';
 import Quiz from './components/Quiz';
 import AddCard from './components/AddCard';
-import PhoneStatusBar from './components/PhoneStatusBar';
 import reducer from './reducers';
-
-
-const Tabs = TabNavigator({
-  Decks: {
-    screen: DeckList,
-    navigationOptions: {
-      tabBarLabel: 'My Decks',
-      tabBarIcon: ({ tintColor }) =>
-        <MaterialCommunityIcons name="cards" size={30} color={tintColor} />,
-    },
-  },
-  Create: {
-    screen: AddDeck,
-    navigationOptions: {
-      tabBarLabel: 'New Deck',
-      tabBarIcon: ({ tintColor }) =>
-        <MaterialIcons name="add-box" size={30} color={tintColor} />,
-    },
-  },
-}, {
-  navigationOptions: {
-    header: null,
-  },
-  animationEnabled: true,
-});
 
 const MainNavigator = StackNavigator({
   Home: {
-    screen: Tabs,
+    screen: DeckList,
+    navigationOptions: ({ navigation }) => ({
+      title: 'My Decks',
+      headerLeft: null,
+      headerRight: <Button title="New" onPress={() => navigation.navigate('Create')} />,
+    }),
+  },
+  Create: {
+    screen: AddDeck,
+    navigationOptions: () => ({
+      title: 'Create Deck',
+    }),
   },
   DeckDetails: {
     screen: DeckDetails,
@@ -56,17 +40,62 @@ const MainNavigator = StackNavigator({
   AddCard: {
     screen: AddCard,
     navigationOptions: () => ({
-      title: 'New Card',
+      title: 'Add Card',
     }),
   },
 });
 
-const store = createStore(reducer);
+const initialState = {
+  byId: {
+    1: {
+      title: 'Art',
+      id: 1,
+      questions: [],
+    },
+    2: {
+      title: 'Science',
+      id: 2,
+      questions: [],
+    },
+    3: {
+      title: 'Math',
+      id: 3,
+      questions: [],
+    },
+    4: {
+      title: 'History',
+      id: 4,
+      questions: [],
+    },
+    5: {
+      title: 'Writing',
+      id: 5,
+      questions: [],
+    },
+    6: {
+      title: 'Music',
+      id: 6,
+      questions: [],
+    },
+    7: {
+      title: 'Sports',
+      id: 7,
+      questions: [],
+    },
+    8: {
+      title: 'Coding',
+      id: 8,
+      questions: [],
+    },
+  },
+  allIds: [1, 2, 3, 4, 5, 6, 7, 8],
+};
+
+const store = createStore(reducer, initialState);
 
 export default () => (
   <Provider store={store}>
     <View style={{ flex: 1 }}>
-      <PhoneStatusBar />
       <MainNavigator />
     </View>
   </Provider>

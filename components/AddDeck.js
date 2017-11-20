@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Text, TextInput, StyleSheet } from 'react-native';
 import { createDeck } from '../actions';
 
-// TODO: Avoid Keyboard View
 // TODO: Also use Add Card component here?
 // TODO: Make container component?
 
@@ -19,7 +18,7 @@ class AddDeck extends Component {
     }));
 
   handleSubmit = () => {
-    const { createNewDeck } = this.props;
+    const { createNewDeck, navigation } = this.props;
     const newDeck = {
       id: v4(),
       title: this.state.deckTitle,
@@ -28,17 +27,17 @@ class AddDeck extends Component {
 
     createNewDeck(newDeck);
 
+    navigation.navigate('Home');
+
     this.setState(() => ({
       deckTitle: '',
     }));
-  }
+  };
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.header}>
-          Name your new deck:
-        </Text>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <Text style={styles.header}>Name your new deck:</Text>
         <TextInput
           autoFocus
           autoCapitalize="words"
@@ -48,7 +47,7 @@ class AddDeck extends Component {
           style={styles.input}
           value={this.state.deckTitle}
         />
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -71,7 +70,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  null,
-  { createNewDeck: createDeck },
-)(AddDeck);
+export default connect(null, { createNewDeck: createDeck })(AddDeck);
