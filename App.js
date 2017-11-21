@@ -6,10 +6,20 @@ import Navigator from './components/Navigator';
 import reducer from './ducks';
 
 const initialState = {
+  cards: {
+    allIds: [0],
+    byId: {
+      0: {
+        question: 'What framework can you use to build native apps in React?',
+        answer: 'React Native',
+        parentId: 1,
+      },
+    },
+  },
   decks: {
     byId: {
       1: {
-        title: 'Art',
+        title: 'Coding',
         id: 1,
         questions: [],
       },
@@ -44,7 +54,7 @@ const initialState = {
         questions: [],
       },
       8: {
-        title: 'Coding',
+        title: 'Art',
         id: 8,
         questions: [],
       },

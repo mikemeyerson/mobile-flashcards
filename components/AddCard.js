@@ -48,7 +48,7 @@ class AddCard extends Component {
       <View style={styles.container}>
         <TextInput
           autoFocus
-          maxLength={50}
+          maxLength={100}
           onChangeText={this.handleQuestionChange}
           onSubmitEditing={this.handleSubmit}
           placeholder="Question"

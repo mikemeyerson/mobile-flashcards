@@ -1,8 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 
-export default ({ children, onPress }) => (
-  <TouchableOpacity style={styles.button} onPress={onPress}>
+const Button = ({ children, onPress, style }) => (
+  <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
     {children}
   </TouchableOpacity>
 );
@@ -19,3 +19,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default Button;
