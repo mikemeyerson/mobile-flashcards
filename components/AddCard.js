@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import { v4 } from 'uuid';
 import Button from './shared/Button';
+import { getDeckById } from '../ducks';
 import { addCardToDeck } from '../ducks/cards';
 
 // TODO: Feature: add multiple cards at once
@@ -22,8 +23,8 @@ class AddCard extends Component {
   handleAnswerChange = this.handleChangeText.bind(this, 'answer');
 
   handleSubmit = () => {
-    const { createNewCard, navigation } = this.props;
-    const { deck } = navigation.state.params;
+    const { createNewCard, navigation, deck } = this.props;
+
     const card = {
       ...this.state,
       id: v4(),
@@ -87,4 +88,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(null, { createNewCard: addCardToDeck })(AddCard);
+const mapStateToProps = (state, ownProps) => ({
+  deck: getDeckById(state, ownProps.navigation.state.params.id),
+});
+
+const mapDispatchToProps = { createNewCard: addCardToDeck };
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCard);

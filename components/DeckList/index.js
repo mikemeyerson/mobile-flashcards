@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView, StyleSheet } from 'react-native';
-import CardsContainer from '../shared/CardsContainer';
+import CardsContainer from './CardsContainer';
 import DeckPreview from './DeckPreview';
 import NoDecksFound from './NoDecksFound';
 import { getDecks } from '../../ducks';
 
 class DeckList extends Component {
-  onPress = (deck) => this.props.navigation.navigate('DeckDetails', { deck });
+  onPress = ({ id, title }) => this.props.navigation.navigate('DeckDetails', { id, title });
 
   render() {
     const { decks } = this.props;

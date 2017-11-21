@@ -1,49 +1,9 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { View, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import AddDeck from './components/AddDeck';
-import DeckList from './components/DeckList';
-import DeckDetails from './components/DeckDetails';
-import Quiz from './components/Quiz';
-import AddCard from './components/AddCard';
+import { View } from 'react-native';
+import Navigator from './components/Navigator';
 import reducer from './ducks';
-
-const MainNavigator = StackNavigator({
-  Home: {
-    screen: DeckList,
-    navigationOptions: ({ navigation }) => ({
-      title: 'My Decks',
-      headerLeft: null,
-      headerRight: <Button title="New" onPress={() => navigation.navigate('Create')} />,
-    }),
-  },
-  Create: {
-    screen: AddDeck,
-    navigationOptions: () => ({
-      title: 'Create Deck',
-    }),
-  },
-  DeckDetails: {
-    screen: DeckDetails,
-    navigationOptions: ({ navigation }) => ({
-      title: navigation.state.params.deck.title,
-    }),
-  },
-  Quiz: {
-    screen: Quiz,
-    navigationOptions: () => ({
-      title: '[deck.title here] Quiz',
-    }),
-  },
-  AddCard: {
-    screen: AddCard,
-    navigationOptions: () => ({
-      title: 'Add Card',
-    }),
-  },
-});
 
 const initialState = {
   decks: {
@@ -98,7 +58,7 @@ const store = createStore(reducer, initialState);
 export default () => (
   <Provider store={store}>
     <View style={{ flex: 1 }}>
-      <MainNavigator />
+      <Navigator />
     </View>
   </Provider>
 );

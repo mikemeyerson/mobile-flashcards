@@ -1,10 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
+import { getDeckById, getCardsForDeck } from '../ducks';
 
-const Quiz = () => (
+const Quiz = ({ deck, cards }) => (
   <View>
     <Text>Quiz View</Text>
   </View>
 );
 
-export default Quiz;
+const mapStateToProps = (state, ownProps) => ({
+  deck: getDeckById(state, ownProps.navigation.state.params.id),
+  cards: getCardsForDeck(state, ownProps.navigation.state.params.id),
+});
+
+export default connect(mapStateToProps, null)(Quiz);
