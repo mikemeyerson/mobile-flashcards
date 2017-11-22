@@ -5,8 +5,17 @@ import CardsContainer from './CardsContainer';
 import DeckPreview from './DeckPreview';
 import NoDecksFound from './NoDecksFound';
 import { getDecks } from '../../ducks';
+import { retrieveDecks } from '../../ducks/decks';
+import { retrieveCards } from '../../ducks/cards';
 
 class DeckList extends Component {
+  componentDidMount() {
+    const { loadDecks, loadCards } = this.props;
+
+    loadDecks();
+    loadCards();
+  }
+
   onPress = ({ id, title }) => this.props.navigation.navigate('DeckDetails', { id, title });
 
   render() {
@@ -41,4 +50,9 @@ const mapStateToProps = (state) => ({
   decks: getDecks(state),
 });
 
-export default connect(mapStateToProps, null)(DeckList);
+const mapDispatchToProps = {
+  loadDecks: retrieveDecks,
+  loadCards: retrieveCards,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList);

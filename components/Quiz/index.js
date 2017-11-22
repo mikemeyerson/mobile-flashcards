@@ -23,7 +23,7 @@ class Quiz extends Component {
     const { cards } = this.props;
 
     if (cardIndex >= cards.length || cardIndex < 0) {
-      const scoreAsPercent = score / cards.length * 100;
+      const scoreAsPercent = Math.round(score / cards.length * 100);
 
       return <QuizComplete score={scoreAsPercent} />;
     }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
 import { KeyboardAvoidingView, Text, TextInput, StyleSheet } from 'react-native';
+import Button from '../shared/Button';
 import { createDeck } from '../../ducks/decks';
 
 // TODO: Also use Add Card component here?
@@ -46,6 +47,9 @@ class AddDeck extends Component {
           style={styles.input}
           value={this.state.deckTitle}
         />
+        <Button onPress={this.handleSubmit}>
+          <Text>Submit</Text>
+        </Button>
       </KeyboardAvoidingView>
     );
   }
