@@ -4,7 +4,7 @@ const DECKS_STORAGE_KEY = 'mobile-flashcards:decks';
 const CARDS_STORAGE_KEY = 'mobile-flashcards:cards';
 
 export function loadDecksFromStorage() {
-  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then((decksString) => JSON.parse(decksString));
+  return AsyncStorage.getItem(DECKS_STORAGE_KEY).then(JSON.parse);
 }
 
 export function saveDeckToStorage(deck) {
@@ -17,7 +17,7 @@ export function saveDeckToStorage(deck) {
 }
 
 export function loadCardsFromStorage() {
-  return AsyncStorage.getItem(CARDS_STORAGE_KEY).then((cardsString) => JSON.parse(cardsString));
+  return AsyncStorage.getItem(CARDS_STORAGE_KEY).then(JSON.parse);
 }
 
 export function saveCardToStorage(card) {

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { saveCardToStorage, loadCardsFromStorage } from '../api';
+import { saveCardToStorage, loadCardsFromStorage } from '../utils/api';
 
 // Actions
 const ADD_CARD_SUCCESS = 'flashcards/cards/ADD_SUCCESS';

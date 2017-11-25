@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { saveDeckToStorage, loadDecksFromStorage } from '../api';
+import { saveDeckToStorage, loadDecksFromStorage } from '../utils/api';
 
 // Actions
 const ADD_DECK_SUCCESS = 'flashcards/decks/ADD_SUCCESS';
@@ -84,4 +84,4 @@ export default combineReducers({
 
 export const selectDecks = (state) => state.allIds.map((id) => state.byId[id]);
 
-export const selectDeckById = (state, id) => state.byId[id];
+export const selectDeckById = (state, id) => state.byId[id] || {};
