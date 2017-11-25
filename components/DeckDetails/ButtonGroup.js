@@ -19,16 +19,6 @@ const styles = StyleSheet.create({
   buttonGroup: {
     marginTop: 20,
   },
-  button: {
-    backgroundColor: 'white',
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: 'black',
-    padding: 10,
-    marginBottom: 10,
-    width: 200,
-    alignItems: 'center',
-  },
   buttonText: {
     fontSize: 20,
   },
