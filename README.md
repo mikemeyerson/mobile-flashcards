@@ -1,6 +1,6 @@
 # Mobile Flashcards
 
-Mobile Flashcards is a study companion app that quizzes you on subjects of your choice. The decks and flashcards are fully configurable.
+Mobile Flashcards is a study companion app that quizzes you on subjects of your choice. The decks and flashcards are fully configurable. The project was bootstrapped using [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 ## How to run
 
@@ -13,8 +13,6 @@ Mobile Flashcards is a study companion app that quizzes you on subjects of your 
 * Run the app
     - `npm start` or `yarn start`
 
-### Contributing
+## Contributing
 Feel free to make a pull request or raise an issue.
 
-### Create React Native App
-Mobile Flashcards was bootstrapped using [Create React Native App](https://github.com/react-community/create-react-native-app).
