@@ -27,7 +27,10 @@ class AddDeck extends Component {
 
     createNewDeck(newDeck);
 
-    navigation.navigate('Home');
+    navigation.navigate('DeckDetails', {
+      ...newDeck,
+      homeKey: navigation.state.key || null,
+    });
 
     this.setState(() => ({
       deckTitle: '',

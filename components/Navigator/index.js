@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, HeaderBackButton } from 'react-navigation';
 import AddDeck from '../AddDeck';
 import DeckList from '../DeckList';
 import DeckDetails from '../DeckDetails';
@@ -24,8 +24,14 @@ const Navigator = StackNavigator({
   },
   DeckDetails: {
     screen: DeckDetails,
-    navigationOptions: ({ navigation: { state: { params: { title } } } }) => ({
-      title,
+    navigationOptions: ({ navigation }) => ({
+      title: navigation.state.params.title,
+      headerLeft: (
+        <HeaderBackButton
+          title="My Decks"
+          onPress={() => navigation.goBack(navigation.state.params.homeKey)}
+        />
+      ),
     }),
   },
   Quiz: {
