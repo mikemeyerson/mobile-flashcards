@@ -7,22 +7,32 @@ class Question extends Component {
     showAnswer: false,
   };
 
+  onCorrectPress = () => {
+    this.setState({ showAnswer: false });
+    this.props.onPress(true);
+  };
+
+  onIncorrectPress = () => {
+    this.setState({ showAnswer: false });
+    this.props.onPress(false);
+  };
+
   toggleAnswer = () => this.setState({ showAnswer: !this.state.showAnswer });
 
   render() {
-    const { card, onPress } = this.props;
+    const { card } = this.props;
     const { showAnswer } = this.state;
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>{showAnswer ? card.answer : card.question}</Text>
         <TouchableOpacity onPress={this.toggleAnswer}>
-          <Text style={{ margin: 15 }}>Show {showAnswer ? 'Question' : 'Answer'}</Text>
+          <Text style={styles.header}>{showAnswer ? card.answer : card.question}</Text>
+          <Text style={styles.toggleAnswerButton}>Show {showAnswer ? 'Question' : 'Answer'}</Text>
         </TouchableOpacity>
-        <Button style={styles.correct} onPress={() => onPress(true)}>
+        <Button style={styles.correct} onPress={this.onCorrectPress}>
           <Text style={styles.buttonText}>Correct</Text>
         </Button>
-        <Button style={styles.incorrect} onPress={() => onPress(false)}>
+        <Button style={styles.incorrect} onPress={this.onIncorrectPress}>
           <Text style={styles.buttonText}>Incorrect</Text>
         </Button>
       </View>
@@ -39,6 +49,12 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 30,
     textAlign: 'center',
+  },
+  toggleAnswerButton: {
+    marginTop: 30,
+    marginBottom: 30,
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
   correct: {
     backgroundColor: 'green',
