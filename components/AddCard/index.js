@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import { v4 } from 'uuid';
-import Button from './shared/Button';
-import { getDeckById } from '../ducks';
-import { addCardToDeck } from '../ducks/cards';
+import Button from '../shared/Button';
+import { getDeckById } from '../../ducks';
+import { addCardToDeck } from '../../ducks/cards';
 
 // TODO: Feature: add multiple cards at once
 
