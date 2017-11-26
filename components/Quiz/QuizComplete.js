@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import Button from '../shared/Button';
 
-class QuizComplete extends Component {
+class QuizComplete extends PureComponent {
   state = {
     bounceValue: new Animated.Value(1),
     subheaderOpacity: new Animated.Value(0),

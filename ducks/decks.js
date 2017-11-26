@@ -84,4 +84,4 @@ export default combineReducers({
 
 export const selectDecks = (state) => state.allIds.map((id) => state.byId[id]);
 
-export const selectDeckById = (state, id) => state.byId[id] || {};
+export const selectDeckById = (state, id) => state.byId[id];

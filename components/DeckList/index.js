@@ -39,6 +39,10 @@ class DeckList extends Component {
   }
 }
 
+DeckList.defaultProps = {
+  decks: [],
+};
+
 const styles = StyleSheet.create({
   contentContainer: {
     padding: 20,

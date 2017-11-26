@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
 import { v4 } from 'uuid';
@@ -8,7 +8,7 @@ import { addCardToDeck } from '../../ducks/cards';
 
 // TODO: Feature: add multiple cards at once
 
-class AddCard extends Component {
+class AddCard extends PureComponent {
   state = {
     question: '',
     answer: '',
@@ -70,6 +70,10 @@ class AddCard extends Component {
     );
   }
 }
+
+AddCard.defaultProps = {
+  deck: {},
+};
 
 const styles = StyleSheet.create({
   container: {

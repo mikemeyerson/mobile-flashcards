@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { v4 } from 'uuid';
 import { KeyboardAvoidingView, Text, TextInput, StyleSheet } from 'react-native';
@@ -8,7 +8,7 @@ import { createDeck } from '../../ducks/decks';
 // TODO: Also use Add Card component here?
 // TODO: Make container component?
 
-class AddDeck extends Component {
+class AddDeck extends PureComponent {
   state = {
     deckTitle: '',
   };

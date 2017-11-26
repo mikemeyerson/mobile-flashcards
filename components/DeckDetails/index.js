@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import ButtonGroup from './ButtonGroup';
 import { getDeckById, getCardsForDeck } from '../../ducks';
 
-const DeckDetails = ({ navigation, deck, cards }) => {
+const DeckDetails = ({ navigation, deck = {}, cards = [] }) => {
   const onQuizPress = () => navigation.navigate('Quiz', { id: deck.id, title: deck.title });
   const onAddCardPress = () => navigation.navigate('AddCard', { id: deck.id });
 
